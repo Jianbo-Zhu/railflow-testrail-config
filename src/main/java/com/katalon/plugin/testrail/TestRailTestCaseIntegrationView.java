@@ -15,16 +15,21 @@ public class TestRailTestCaseIntegrationView implements TestCaseIntegrationViewD
     private Composite container;
 
     private Text txtId;
+    private Text txtAuthor;
 
     private Boolean isEdited = false;
 
     @Override
-    public Control onCreateView(Composite parent, TestCaseIntegrationViewDescription.PartActionService partActionService, TestCaseEntity testCase) {
+    public Control onCreateView(Composite parent,
+            TestCaseIntegrationViewDescription.PartActionService partActionService, TestCaseEntity testCase) {
 
         container = new Composite(parent, SWT.NONE);
 
         createLabel("ID");
         txtId = createTextbox();
+
+        createLabel("Author");
+        txtAuthor = createTextbox();
 
         GridLayout gridLayout = new GridLayout(2, false);
         gridLayout.verticalSpacing = 10;
@@ -32,12 +37,20 @@ public class TestRailTestCaseIntegrationView implements TestCaseIntegrationViewD
         container.setLayout(gridLayout);
 
         Integration integration = testCase.getIntegration(TestRailConstants.INTEGRATION_ID);
-        if(integration != null) {
+        if (integration != null) {
             Map<String, String> integrationProps = integration.getProperties();
-           if(integrationProps.containsKey(TestRailConstants.INTEGRATION_TESTCASE_ID)){
-               txtId.setText(integrationProps.get(TestRailConstants.INTEGRATION_TESTCASE_ID));
-           }
+            if (integrationProps.containsKey(TestRailConstants.INTEGRATION_TESTCASE_ID)) {
+                txtId.setText(integrationProps.get(TestRailConstants.INTEGRATION_TESTCASE_ID));
+            }
+            if (integrationProps.containsKey(TestRailConstants.INTEGRATION_TESTCASE_AUTHOR)) {
+                txtAuthor.setText(integrationProps.get(TestRailConstants.INTEGRATION_TESTCASE_AUTHOR));
+            }
         }
+
+        txtAuthor.addModifyListener(modifyEvent -> {
+            isEdited = true;
+            partActionService.markDirty();
+        });
 
         txtId.addModifyListener(modifyEvent -> {
             isEdited = true;
@@ -66,6 +79,7 @@ public class TestRailTestCaseIntegrationView implements TestCaseIntegrationViewD
     public Integration getIntegrationBeforeSaving() {
         TestRailTestCaseIntegration integration = new TestRailTestCaseIntegration();
         integration.setTestCaseId(txtId.getText());
+        integration.setTestCaseAuthor(txtAuthor.getText());
         isEdited = false;
         return integration;
     }

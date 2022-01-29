@@ -82,7 +82,7 @@ public class TestRailEventListenerInitializer implements EventListenerInitialize
                 if (!isIntegrationEnabled) {
                     return;
                 }
-                String authToken = preferences.getString(TestRailConstants.PREF_TESTRAIL_USERNAME, "");
+                // String authToken = preferences.getString(TestRailConstants.PREF_TESTRAIL_USERNAME, "");
 
                 if (ExecutionEvent.TEST_SUITE_FINISHED_EVENT.equals(event.getTopic())) {
                     ExecutionEvent eventObject = (ExecutionEvent) event.getProperty("org.eclipse.e4.data");
