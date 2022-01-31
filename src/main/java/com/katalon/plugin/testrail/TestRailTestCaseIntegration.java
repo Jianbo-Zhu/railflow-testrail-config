@@ -8,6 +8,24 @@ import com.katalon.platform.api.model.Integration;
 public class TestRailTestCaseIntegration implements Integration {
     private String testCaseId;
     private String testCaseAuthor;
+    private String testCaseDesc;
+    private String testCaseJiraID;
+
+    public String getTestCaseDesc() {
+        return testCaseDesc;
+    }
+
+    public void setTestCaseDesc(String testCaseDesc) {
+        this.testCaseDesc = testCaseDesc;
+    }
+
+    public String getTestCaseJiraID() {
+        return testCaseJiraID;
+    }
+
+    public void setTestCaseJiraID(String testCaseJiraID) {
+        this.testCaseJiraID = testCaseJiraID;
+    }
 
     public void setTestCaseId(String testCaseId) {
         this.testCaseId = testCaseId;
@@ -35,6 +53,8 @@ public class TestRailTestCaseIntegration implements Integration {
         HashMap<String, String> props = new HashMap<>();
         props.put(TestRailConstants.INTEGRATION_TESTCASE_ID, getTestCaseId());
         props.put(TestRailConstants.INTEGRATION_TESTCASE_AUTHOR, getTestCaseAuthor());
+        props.put(TestRailConstants.INTEGRATION_TESTCASE_DESC, getTestCaseDesc());
+        props.put(TestRailConstants.INTEGRATION_TESTCASE_JIRAID, getTestCaseJiraID());
         return props;
     }
 }

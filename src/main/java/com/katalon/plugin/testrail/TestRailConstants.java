@@ -20,4 +20,8 @@ public interface TestRailConstants {
     String INTEGRATION_TESTCASE_ID = "testRail.testcase.id";
 
     String INTEGRATION_TESTCASE_AUTHOR = "testRail.testcase.author";
+
+    String INTEGRATION_TESTCASE_JIRAID = "testRail.testcase.jiraid";
+
+    String INTEGRATION_TESTCASE_DESC = "testRail.testcase.desc";
 }

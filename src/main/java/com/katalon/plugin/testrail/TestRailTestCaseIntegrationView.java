@@ -4,6 +4,7 @@ import com.katalon.platform.api.extension.TestCaseIntegrationViewDescription;
 import com.katalon.platform.api.model.Integration;
 import com.katalon.platform.api.model.TestCaseEntity;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
@@ -16,6 +17,8 @@ public class TestRailTestCaseIntegrationView implements TestCaseIntegrationViewD
 
     private Text txtId;
     private Text txtAuthor;
+    private Text txtJiraID;
+    private Text txtDesc;
 
     private Boolean isEdited = false;
 
@@ -31,6 +34,12 @@ public class TestRailTestCaseIntegrationView implements TestCaseIntegrationViewD
         createLabel("Author");
         txtAuthor = createTextbox();
 
+        createLabel("JIRA ID");
+        txtJiraID = createTextbox();
+
+        createLabel("Description");
+        txtDesc = createTextbox();
+
         GridLayout gridLayout = new GridLayout(2, false);
         gridLayout.verticalSpacing = 10;
         gridLayout.horizontalSpacing = 15;
@@ -45,17 +54,23 @@ public class TestRailTestCaseIntegrationView implements TestCaseIntegrationViewD
             if (integrationProps.containsKey(TestRailConstants.INTEGRATION_TESTCASE_AUTHOR)) {
                 txtAuthor.setText(integrationProps.get(TestRailConstants.INTEGRATION_TESTCASE_AUTHOR));
             }
+            if (integrationProps.containsKey(TestRailConstants.INTEGRATION_TESTCASE_JIRAID)) {
+                txtJiraID.setText(integrationProps.get(TestRailConstants.INTEGRATION_TESTCASE_JIRAID));
+            }
+            if (integrationProps.containsKey(TestRailConstants.INTEGRATION_TESTCASE_DESC)) {
+                txtDesc.setText(integrationProps.get(TestRailConstants.INTEGRATION_TESTCASE_DESC));
+            }
         }
 
-        txtAuthor.addModifyListener(modifyEvent -> {
+        ModifyListener listener = modifyEvent -> {
             isEdited = true;
             partActionService.markDirty();
-        });
+        };
 
-        txtId.addModifyListener(modifyEvent -> {
-            isEdited = true;
-            partActionService.markDirty();
-        });
+        txtAuthor.addModifyListener(listener);
+        txtId.addModifyListener(listener);
+        txtDesc.addModifyListener(listener);
+        txtJiraID.addModifyListener(listener);
 
         return container;
     }
@@ -80,6 +95,8 @@ public class TestRailTestCaseIntegrationView implements TestCaseIntegrationViewD
         TestRailTestCaseIntegration integration = new TestRailTestCaseIntegration();
         integration.setTestCaseId(txtId.getText());
         integration.setTestCaseAuthor(txtAuthor.getText());
+        integration.setTestCaseDesc(txtDesc.getText());
+        integration.setTestCaseJiraID(txtJiraID.getText());
         isEdited = false;
         return integration;
     }
