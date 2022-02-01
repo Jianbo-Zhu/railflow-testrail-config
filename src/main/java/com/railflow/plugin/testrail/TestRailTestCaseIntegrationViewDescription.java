@@ -1,4 +1,4 @@
-package com.katalon.plugin.testrail;
+package com.railflow.plugin.testrail;
 
 import com.katalon.platform.api.exception.ResourceException;
 import com.katalon.platform.api.extension.TestCaseIntegrationViewDescription;
@@ -10,7 +10,7 @@ public class TestRailTestCaseIntegrationViewDescription implements TestCaseInteg
 
     @Override
     public String getName() {
-        return "TestRail";
+        return "TestRail New";
     }
 
     @Override

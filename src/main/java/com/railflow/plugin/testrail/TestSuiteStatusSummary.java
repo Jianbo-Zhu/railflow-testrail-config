@@ -1,4 +1,4 @@
-package com.katalon.plugin.testrail;
+package com.railflow.plugin.testrail;
 
 import com.katalon.platform.api.execution.TestSuiteExecutionContext;
 

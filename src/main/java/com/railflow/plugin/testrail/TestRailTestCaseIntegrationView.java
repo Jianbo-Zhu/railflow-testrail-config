@@ -1,4 +1,4 @@
-package com.katalon.plugin.testrail;
+package com.railflow.plugin.testrail;
 
 import com.katalon.platform.api.extension.TestCaseIntegrationViewDescription;
 import com.katalon.platform.api.model.Integration;
@@ -28,16 +28,16 @@ public class TestRailTestCaseIntegrationView implements TestCaseIntegrationViewD
 
         container = new Composite(parent, SWT.NONE);
 
-        createLabel("ID");
+        createLabel("ID New");
         txtId = createTextbox();
 
-        createLabel("Author");
+        createLabel("Author New");
         txtAuthor = createTextbox();
 
-        createLabel("JIRA ID");
+        createLabel("JIRA ID New");
         txtJiraID = createTextbox();
 
-        createLabel("Description");
+        createLabel("Description New");
         txtDesc = createTextbox();
 
         GridLayout gridLayout = new GridLayout(2, false);

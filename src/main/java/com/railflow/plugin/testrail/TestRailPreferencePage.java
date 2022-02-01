@@ -1,4 +1,4 @@
-package com.katalon.plugin.testrail;
+package com.railflow.plugin.testrail;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.PreferencePage;
@@ -218,6 +218,7 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
 
             container.layout(true, true);
         } catch (ResourceException e) {
+            System.out.println(e.getDetailMessage());
             MessageDialog.openWarning(getShell(), "Warning", "Unable to update TestRail Integration Settings.");
         }
     }

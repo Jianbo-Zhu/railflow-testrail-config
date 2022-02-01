@@ -1,4 +1,4 @@
-package com.katalon.plugin.testrail;
+package com.railflow.plugin.testrail;
 
 import org.eclipse.jface.preference.PreferencePage;
 
@@ -8,12 +8,12 @@ public class TestRailPluginPreferencePage implements PluginPreferencePage {
 
     @Override
     public String getName() {
-        return "TestRail";
+        return "Railflow TestRail";
     }
 
     @Override
     public String getPageId() {
-        return "com.katalon.plugin.testrail.TestRailPluginPreferencePage";
+        return "com.railflow.plugin.testrail.TestRailPluginPreferencePage";
     }
 
     @Override
