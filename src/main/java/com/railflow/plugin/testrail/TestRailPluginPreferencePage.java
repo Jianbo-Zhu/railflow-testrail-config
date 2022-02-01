@@ -8,7 +8,7 @@ public class TestRailPluginPreferencePage implements PluginPreferencePage {
 
     @Override
     public String getName() {
-        return "Railflow TestRail";
+        return "Railflow TestRail Config";
     }
 
     @Override

@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.railflow</groupId>
-    <artifactId>railflow-testrail-plugin</artifactId>
+    <artifactId>railflow-testrail-config</artifactId>
     <version>1.0.0</version>
 
     <packaging>bundle</packaging>

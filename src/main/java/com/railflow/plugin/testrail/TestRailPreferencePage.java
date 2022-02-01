@@ -34,6 +34,8 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
 
     private Text txtProject;
 
+    private Text txtLicenseKey;
+
     private Composite container;
 
     private Button btnTestConnection;
@@ -48,7 +50,7 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         container.setLayout(new GridLayout(1, false));
 
         chckEnableIntegration = new Button(container, SWT.CHECK);
-        chckEnableIntegration.setText("Using TestRail");
+        chckEnableIntegration.setText("Enable Railflow Plugin");
 
         grpAuthentication = new Group(container, SWT.NONE);
         grpAuthentication.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
@@ -56,7 +58,7 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         glAuthentication.horizontalSpacing = 15;
         glAuthentication.verticalSpacing = 10;
         grpAuthentication.setLayout(glAuthentication);
-        grpAuthentication.setText("Authentication");
+        grpAuthentication.setText("TestRail Configuration");
 
         createLabel("URL");
         txtUrl = createTextbox();
@@ -64,10 +66,13 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         createLabel("Username");
         txtUsername = createTextbox();
 
-        createLabel("Password");
+        createLabel("Password / API Key");
         txtPassword = createPasswordTextbox();
 
-        createLabel("Project");
+        createLabel("Railflow License Key");
+        txtLicenseKey = createTextbox();
+
+        createLabel("Project ID / Key");
         txtProject = createTextbox();
 
         btnTestConnection = new Button(grpAuthentication, SWT.PUSH);
@@ -194,6 +199,7 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
             pluginStore.setString(TestRailConstants.PREF_TESTRAIL_PASSWORD, txtPassword.getText());
             pluginStore.setString(TestRailConstants.PREF_TESTRAIL_URL, txtUrl.getText());
             pluginStore.setString(TestRailConstants.PREF_TESTRAIL_PROJECT, txtProject.getText());
+            pluginStore.setString(TestRailConstants.PREF_TESTRAIL_LICENSEKEY, txtLicenseKey.getText());
 
             pluginStore.save();
 
@@ -215,6 +221,7 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
             txtPassword.setText(pluginStore.getString(TestRailConstants.PREF_TESTRAIL_PASSWORD, ""));
             txtUrl.setText(pluginStore.getString(TestRailConstants.PREF_TESTRAIL_URL, ""));
             txtProject.setText(pluginStore.getString(TestRailConstants.PREF_TESTRAIL_PROJECT, ""));
+            txtLicenseKey.setText(pluginStore.getString(TestRailConstants.PREF_TESTRAIL_LICENSEKEY, ""));
 
             container.layout(true, true);
         } catch (ResourceException e) {
