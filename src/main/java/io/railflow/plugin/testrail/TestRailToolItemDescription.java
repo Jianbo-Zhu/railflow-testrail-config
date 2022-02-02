@@ -1,4 +1,4 @@
-package com.railflow.plugin.testrail;
+package io.railflow.plugin.testrail;
 
 import com.katalon.platform.api.extension.ToolItemDescription;
 import com.katalon.platform.api.service.ApplicationManager;

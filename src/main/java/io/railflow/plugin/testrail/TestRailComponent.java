@@ -1,4 +1,4 @@
-package com.railflow.plugin.testrail;
+package io.railflow.plugin.testrail;
 
 import com.katalon.platform.api.exception.ResourceException;
 import com.katalon.platform.api.preference.PluginPreference;

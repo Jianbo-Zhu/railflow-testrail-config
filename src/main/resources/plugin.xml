@@ -2,41 +2,41 @@
     <extension
             point="com.katalon.platform.extensions">
         <point
-                id="com.railflow.plugin.testrail.TestRailEventListenerInitializer"
+                id="io.railflow.plugin.testrail.TestRailEventListenerInitializer"
                 extensionPointId="com.katalon.platform.api.extension.eventListener"
-                implementationClass="com.railflow.plugin.testrail.TestRailEventListenerInitializer">
+                implementationClass="io.railflow.plugin.testrail.TestRailEventListenerInitializer">
         </point>
     </extension>
     <extension
             point="com.katalon.platform.extensions">
         <point
-                id="com.railflow.plugin.testrail.TestRailToolItemDescription"
+                id="io.railflow.plugin.testrail.TestRailToolItemDescription"
                 extensionPointId="com.katalon.platform.api.extension.newToolItem"
-                implementationClass="com.railflow.plugin.testrail.TestRailToolItemDescription">
+                implementationClass="io.railflow.plugin.testrail.TestRailToolItemDescription">
         </point>
     </extension>
     <extension
          point="com.katalon.platform.extensions">
       <point
-            id="com.railflow.plugin.testrail.TestRailPluginPreferencePage"
+            id="io.railflow.plugin.testrail.TestRailPluginPreferencePage"
             extensionPointId="com.katalon.platform.api.extension.pluginPreferencePage"
-            implementationClass="com.railflow.plugin.testrail.TestRailPluginPreferencePage">
+            implementationClass="io.railflow.plugin.testrail.TestRailPluginPreferencePage">
       </point>
     </extension>
     <extension
             point="com.katalon.platform.extensions">
         <point
-                id="com.railflow.plugin.testrail.TestRailTestCaseIntegrationPage"
+                id="io.railflow.plugin.testrail.TestRailTestCaseIntegrationPage"
                 extensionPointId="com.katalon.platform.api.extension.testCaseIntegrationViewDescription"
-                implementationClass="com.railflow.plugin.testrail.TestRailTestCaseIntegrationViewDescription">
+                implementationClass="io.railflow.plugin.testrail.TestRailTestCaseIntegrationViewDescription">
         </point>
     </extension>
     <extension
             point="com.katalon.platform.extensions">
         <point
-                id="com.katalon.plugin.dynamic_execution.TestRailFilteringTestSuiteImpl"
+                id="io.railflow.plugin.dynamic_execution.TestRailFilteringTestSuiteImpl"
                 extensionPointId="com.katalon.platform.api.extension.dynamicQueryingTestSuiteDescription"
-                implementationClass="com.railflow.plugin.testrail.TestRailQueryingTestSuite">
+                implementationClass="io.railflow.plugin.testrail.TestRailQueryingTestSuite">
         </point>
     </extension>
 </plugin>

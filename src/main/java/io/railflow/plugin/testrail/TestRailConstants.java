@@ -1,9 +1,9 @@
-package com.railflow.plugin.testrail;
+package io.railflow.plugin.testrail;
 
 public interface TestRailConstants {
-    String PLUGIN_ID = "com.railflow.railflow-testrail-config";
+    String PLUGIN_ID = "io.railflow.railflow-testrail-config";
     
-    String PREF_PAGE_ID = "com.railflow.plugin.testrail.TestRailPluginPreferencePage";
+    String PREF_PAGE_ID = "io.railflow.plugin.testrail.TestRailPluginPreferencePage";
 
     String PREF_TESTRAIL_ENABLED = "railflow.testRail.isTestRailEnabled";
 
@@ -17,7 +17,7 @@ public interface TestRailConstants {
 
     String PREF_TESTRAIL_LICENSEKEY = "railflow.testRail.licensekey";
 
-    String INTEGRATION_ID = "com.railflow.plugin.testrail.TestRailIntegration";
+    String INTEGRATION_ID = "io.railflow.plugin.testrail.TestRailIntegration";
 
     String INTEGRATION_TESTCASE_ID = "railflow.testRail.testcase.id";
 

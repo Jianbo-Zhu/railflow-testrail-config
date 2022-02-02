@@ -1,4 +1,4 @@
-package com.railflow.plugin.testrail;
+package io.railflow.plugin.testrail;
 
 import com.katalon.platform.api.extension.TestCaseIntegrationViewDescription;
 import com.katalon.platform.api.model.Integration;

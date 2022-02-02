@@ -1,4 +1,4 @@
-package com.railflow.plugin.testrail;
+package io.railflow.plugin.testrail;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.PreferencePage;

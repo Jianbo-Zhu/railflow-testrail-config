@@ -10,7 +10,7 @@
         <version>1.0.20</version>
     </parent>
 
-    <groupId>com.railflow</groupId>
+    <groupId>io.railflow</groupId>
     <artifactId>railflow-testrail-config</artifactId>
     <version>1.0.0</version>
 
@@ -28,6 +28,16 @@
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.railflow</groupId>
+            <artifactId>commons</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.railflow</groupId>
+            <artifactId>testrail-client</artifactId>
+            <version>2.1</version>
         </dependency>
     </dependencies>
 
@@ -71,7 +81,7 @@
                         <_nouse>true</_nouse>
 
                         <!-- Change your public package here -->
-                        <Export-Package>com.katalon.plugin.testrail*</Export-Package>
+                        <Export-Package>io.testrail.plugin.testrail*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

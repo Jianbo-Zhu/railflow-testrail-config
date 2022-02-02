@@ -1,4 +1,4 @@
-package com.railflow.plugin.testrail;
+package io.railflow.plugin.testrail;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
