@@ -81,7 +81,7 @@
                         <_nouse>true</_nouse>
 
                         <!-- Change your public package here -->
-                        <Export-Package>io.testrail.plugin.testrail*</Export-Package>
+                        <Export-Package>io.railflow.plugin.testrail*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

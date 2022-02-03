@@ -15,6 +15,13 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import io.railflow.testrail.client.api.TestRailClient;
+import io.railflow.testrail.client.api.TestRailConnectionParameters;
+import io.railflow.testrail.client.api.impl.ApiGetMethod;
+import io.railflow.testrail.client.api.impl.TestRailClientImpl;
+import io.railflow.testrail.client.api.impl.TestRailConnectionParametersImpl;
+import io.railflow.testrail.client.model.Project;
+
 import com.katalon.platform.api.exception.ResourceException;
 import com.katalon.platform.api.preference.PluginPreference;
 import com.katalon.platform.api.service.ApplicationManager;
@@ -122,7 +129,7 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         label.setLayoutData(gridData);
     }
 
-    private void testTestRailConnection(String username, String password, String url, String project) {
+    private void testTestRailConnection(String username, String password, String url, String projectId) {
         btnTestConnection.setEnabled(false);
         lblConnectionStatus.setForeground(lblConnectionStatus.getDisplay().getSystemColor(SWT.COLOR_DARK_YELLOW));
         lblConnectionStatus.setText("Connecting...");
@@ -130,9 +137,13 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         thread = new Thread(() -> {
             try {
                 // test connection here
-                TestRailConnector connector = new TestRailConnector(url, username, password);
-                connector.getProject(project);
-
+                // TestRailConnector connector = new TestRailConnector(url, username, password);
+                // connector.getProject(projectId);
+                TestRailConnectionParameters testRailConnectionParameters = new TestRailConnectionParametersImpl(url, username, password);
+                try (TestRailClient testRailClient = new TestRailClientImpl(testRailConnectionParameters, null)) {
+                    Project project = testRailClient.executeGetRequest(ApiGetMethod.GET_PROJECT, Integer.parseInt(projectId));
+                    System.out.println(project.getName());
+                }
                 syncExec(() -> {
                     lblConnectionStatus
                             .setForeground(lblConnectionStatus.getDisplay().getSystemColor(SWT.COLOR_DARK_GREEN));
