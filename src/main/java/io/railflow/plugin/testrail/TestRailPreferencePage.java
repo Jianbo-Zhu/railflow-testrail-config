@@ -15,6 +15,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import io.railflow.license.LicenseHandler;
+import io.railflow.license.LicenseHandlerFactoryImpl;
 import io.railflow.testrail.client.api.TestRailClient;
 import io.railflow.testrail.client.api.TestRailConnectionParameters;
 import io.railflow.testrail.client.api.impl.ApiGetMethod;
@@ -213,6 +215,13 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
             pluginStore.setString(TestRailConstants.PREF_TESTRAIL_LICENSEKEY, txtLicenseKey.getText());
 
             pluginStore.save();
+            // check license
+            try{
+                LicenseHandler licenseHandler = LicenseHandlerFactoryImpl.THE_INSTANCE.create(null);
+                licenseHandler.checkLicense(txtLicenseKey.getText());
+            } catch (Exception e) {
+                MessageDialog.openWarning(getShell(), "Warning", "License Key is invalid or expired!");
+            }
 
             return super.performOk();
         } catch (ResourceException e) {
