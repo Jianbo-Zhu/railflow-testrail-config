@@ -1,4 +1,4 @@
-package com.katalon.plugin.testrail;
+package io.railflow.plugin.testrail;
 
 import java.util.HashMap;
 import java.util.Map;

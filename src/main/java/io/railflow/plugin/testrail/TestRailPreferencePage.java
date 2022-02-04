@@ -1,4 +1,4 @@
-package com.katalon.plugin.testrail;
+package io.railflow.plugin.testrail;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.PreferencePage;
@@ -14,6 +14,15 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+
+import io.railflow.license.LicenseHandler;
+import io.railflow.license.LicenseHandlerFactoryImpl;
+import io.railflow.testrail.client.api.TestRailClient;
+import io.railflow.testrail.client.api.TestRailConnectionParameters;
+import io.railflow.testrail.client.api.impl.ApiGetMethod;
+import io.railflow.testrail.client.api.impl.TestRailClientImpl;
+import io.railflow.testrail.client.api.impl.TestRailConnectionParametersImpl;
+import io.railflow.testrail.client.model.Project;
 
 import com.katalon.platform.api.exception.ResourceException;
 import com.katalon.platform.api.preference.PluginPreference;
@@ -34,6 +43,8 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
 
     private Text txtProject;
 
+    private Text txtLicenseKey;
+
     private Composite container;
 
     private Button btnTestConnection;
@@ -48,7 +59,7 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         container.setLayout(new GridLayout(1, false));
 
         chckEnableIntegration = new Button(container, SWT.CHECK);
-        chckEnableIntegration.setText("Using TestRail");
+        chckEnableIntegration.setText("Enable Railflow Plugin");
 
         grpAuthentication = new Group(container, SWT.NONE);
         grpAuthentication.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
@@ -56,7 +67,7 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         glAuthentication.horizontalSpacing = 15;
         glAuthentication.verticalSpacing = 10;
         grpAuthentication.setLayout(glAuthentication);
-        grpAuthentication.setText("Authentication");
+        grpAuthentication.setText("TestRail Configuration");
 
         createLabel("URL");
         txtUrl = createTextbox();
@@ -64,10 +75,13 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         createLabel("Username");
         txtUsername = createTextbox();
 
-        createLabel("Password");
+        createLabel("Password / API Key");
         txtPassword = createPasswordTextbox();
 
-        createLabel("Project");
+        createLabel("Railflow License Key");
+        txtLicenseKey = createTextbox();
+
+        createLabel("Project ID / Key");
         txtProject = createTextbox();
 
         btnTestConnection = new Button(grpAuthentication, SWT.PUSH);
@@ -117,7 +131,7 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         label.setLayoutData(gridData);
     }
 
-    private void testTestRailConnection(String username, String password, String url, String project) {
+    private void testTestRailConnection(String username, String password, String url, String projectId) {
         btnTestConnection.setEnabled(false);
         lblConnectionStatus.setForeground(lblConnectionStatus.getDisplay().getSystemColor(SWT.COLOR_DARK_YELLOW));
         lblConnectionStatus.setText("Connecting...");
@@ -125,9 +139,13 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
         thread = new Thread(() -> {
             try {
                 // test connection here
-                TestRailConnector connector = new TestRailConnector(url, username, password);
-                connector.getProject(project);
-
+                // TestRailConnector connector = new TestRailConnector(url, username, password);
+                // connector.getProject(projectId);
+                TestRailConnectionParameters testRailConnectionParameters = new TestRailConnectionParametersImpl(url, username, password);
+                try (TestRailClient testRailClient = new TestRailClientImpl(testRailConnectionParameters, null)) {
+                    Project project = testRailClient.executeGetRequest(ApiGetMethod.GET_PROJECT, Integer.parseInt(projectId));
+                    System.out.println(project.getName());
+                }
                 syncExec(() -> {
                     lblConnectionStatus
                             .setForeground(lblConnectionStatus.getDisplay().getSystemColor(SWT.COLOR_DARK_GREEN));
@@ -194,8 +212,16 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
             pluginStore.setString(TestRailConstants.PREF_TESTRAIL_PASSWORD, txtPassword.getText());
             pluginStore.setString(TestRailConstants.PREF_TESTRAIL_URL, txtUrl.getText());
             pluginStore.setString(TestRailConstants.PREF_TESTRAIL_PROJECT, txtProject.getText());
+            pluginStore.setString(TestRailConstants.PREF_TESTRAIL_LICENSEKEY, txtLicenseKey.getText());
 
             pluginStore.save();
+            // check license
+            try{
+                LicenseHandler licenseHandler = LicenseHandlerFactoryImpl.THE_INSTANCE.create(null);
+                licenseHandler.checkLicense(txtLicenseKey.getText());
+            } catch (Exception e) {
+                MessageDialog.openWarning(getShell(), "Warning", "License Key is invalid or expired!");
+            }
 
             return super.performOk();
         } catch (ResourceException e) {
@@ -215,9 +241,11 @@ public class TestRailPreferencePage extends PreferencePage implements TestRailCo
             txtPassword.setText(pluginStore.getString(TestRailConstants.PREF_TESTRAIL_PASSWORD, ""));
             txtUrl.setText(pluginStore.getString(TestRailConstants.PREF_TESTRAIL_URL, ""));
             txtProject.setText(pluginStore.getString(TestRailConstants.PREF_TESTRAIL_PROJECT, ""));
+            txtLicenseKey.setText(pluginStore.getString(TestRailConstants.PREF_TESTRAIL_LICENSEKEY, ""));
 
             container.layout(true, true);
         } catch (ResourceException e) {
+            System.out.println(e.getDetailMessage());
             MessageDialog.openWarning(getShell(), "Warning", "Unable to update TestRail Integration Settings.");
         }
     }

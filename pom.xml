@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -10,9 +10,9 @@
         <version>1.0.20</version>
     </parent>
 
-    <groupId>com.katalon</groupId>
-    <artifactId>katalon-studio-testrail-plugin</artifactId>
-    <version>1.1.2</version>
+    <groupId>io.railflow</groupId>
+    <artifactId>railflow-testrail-config</artifactId>
+    <version>1.0.0</version>
 
     <packaging>bundle</packaging>
 
@@ -23,11 +23,26 @@
             <artifactId>com.katalon.platform</artifactId>
             <version>1.0.20</version>
         </dependency>
+        <dependency>
+            <groupId>io.railflow</groupId>
+            <artifactId>license</artifactId>
+            <version>1.0</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.railflow</groupId>
+            <artifactId>commons</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.railflow</groupId>
+            <artifactId>testrail-client</artifactId>
+            <version>2.1</version>
         </dependency>
     </dependencies>
 
@@ -59,6 +74,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.4</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -71,7 +87,7 @@
                         <_nouse>true</_nouse>
 
                         <!-- Change your public package here -->
-                        <Export-Package>com.katalon.plugin.testrail*</Export-Package>
+                        <Export-Package>io.railflow.plugin.testrail*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

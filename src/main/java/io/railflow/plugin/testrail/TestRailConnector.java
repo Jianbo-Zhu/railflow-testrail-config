@@ -1,4 +1,4 @@
-package com.katalon.plugin.testrail;
+package io.railflow.plugin.testrail;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
