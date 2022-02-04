@@ -10,9 +10,9 @@
     <extension
             point="com.katalon.platform.extensions">
         <point
-                id="io.railflow.plugin.testrail.TestRailToolItemDescription"
-                extensionPointId="com.katalon.platform.api.extension.newToolItem"
-                implementationClass="io.railflow.plugin.testrail.TestRailToolItemDescription">
+                id="io.railflow.plugin.testrail.TestRailMenuItemDescription"
+                extensionPointId="com.katalon.platform.api.extension.newDropdownToolItem"
+                implementationClass="io.railflow.plugin.testrail.TestRailMenuItemDescription">
         </point>
     </extension>
     <extension

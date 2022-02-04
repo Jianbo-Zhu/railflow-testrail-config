@@ -13,7 +13,7 @@ public class TestRailPluginPreferencePage implements PluginPreferencePage {
 
     @Override
     public String getPageId() {
-        return "com.railflow.plugin.testrail.TestRailPluginPreferencePage";
+        return TestRailConstants.PREF_PAGE_ID;
     }
 
     @Override
